@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UF2177 · Evaluación inicial (ALUMNO)</title>
+  <style>
+    :root{
+      --bg:#0b0f17; --card:#0f1624; --text:#e9eefb; --muted:#a9b4cf;
+      --line:rgba(255,255,255,.08); --accent:#4da3ff; --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.35;color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(77,163,255,.18), transparent 60%),
+        radial-gradient(1000px 700px at 90% 10%, rgba(51,194,127,.14), transparent 60%),
+        var(--bg);
+    }
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px 40px}
+    .hero{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:18px 18px 14px;
+      box-shadow:var(--shadow);
+      position:sticky; top:12px; z-index:5;
+      backdrop-filter:blur(10px);
+    }
+    .hero h1{margin:0 0 6px;font-size:18px}
+    .hero p{margin:0;color:var(--muted);font-size:13px}
+    .pillrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:8px 10px;background:rgba(255,255,255,.03)}
+    .actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);
+      padding:9px 12px;border-radius:12px;font-weight:650;font-size:13px;transition:.15s transform,.15s background;user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
+    .btn.primary{border-color:rgba(77,163,255,.45);background:rgba(77,163,255,.14)}
+    .btn.danger{border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
+    .tabs{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+    .tab{
+      cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);
+      padding:8px 10px;border-radius:999px;font-size:13px;user-select:none;
+    }
+    .tab.active{color:var(--text);border-color:rgba(77,163,255,.55);background:rgba(77,163,255,.12)}
+    .grid{display:grid;gap:14px;margin-top:16px}
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+    }
+    .card h2{margin:0 0 4px;font-size:16px}
+    .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
+    .hint{margin-top:10px;padding:10px 12px;border-radius:14px;border:1px dashed rgba(255,255,255,.18);background:rgba(255,255,255,.03);color:var(--muted);font-size:13px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+    label{font-size:12px;color:var(--muted);display:block;margin:10px 0 6px}
+    input[type="text"], input[type="date"], select, textarea{
+      width:100%;border:1px solid var(--line);background:rgba(15,22,36,.7);color:var(--text);
+      padding:10px 12px;border-radius:14px;outline:none;
+    }
+    textarea{min-height:110px;resize:vertical}
+    .q{border-top:1px solid rgba(255,255,255,.06);padding-top:12px;margin-top:12px}
+    .q:first-child{border-top:none;padding-top:0;margin-top:0}
+    .qtitle{display:flex;gap:10px;align-items:flex-start}
+    .qnum{
+      min-width:28px;height:28px;border-radius:10px;display:grid;place-items:center;
+      background:rgba(77,163,255,.14);border:1px solid rgba(77,163,255,.35);font-weight:800;font-size:12px;
+    }
+    .qtext{font-weight:700}
+    .opts{margin-top:10px;display:grid;gap:8px}
+    .opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+    .opt input{margin-top:2px}
+    .small{font-size:12px;color:var(--muted)}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    @media print{
+      body{background:#fff;color:#000}
+      .hero,.tabs,.actions,.btn,.hint.no-print{display:none !important}
+      .wrap{max-width:none;margin:0;padding:0}
+      .card{box-shadow:none;border:1px solid #ddd;background:#fff}
+      input,select,textarea{border:1px solid #aaa;background:#fff;color:#000}
+      .print-break{page-break-before:always}
+      #printBackup{display:block !important}
+    }
+    #printBackup{display:none}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>UF2177 · Evaluación inicial (ALUMNO)</h1>
+    <p>Esto no es un examen para “pillar”. Es para ajustar el ritmo y ayudarte mejor. Responde sin buscar.</p>
+
+    <div class="pillrow">
+      <span class="pill">⏱️ 25–35 min</span>
+      <span class="pill">💾 Guardado automático</span>
+      <span class="pill">🖨️ Añade copia al imprimir</span>
+      <div class="actions">
+        <button class="btn primary" type="button" id="btnPrint">Imprimir a PDF</button>
+        <button class="btn danger" type="button" id="btnReset">Borrar respuestas</button>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-tab="datos">1) Datos</div>
+      <div class="tab" data-tab="conceptos">2) Conceptos</div>
+      <div class="tab" data-tab="test">3) Test</div>
+      <div class="tab" data-tab="casos">4) Mini-casos</div>
+      <div class="tab" data-tab="motivacion">5) Motivación</div>
+      <div class="tab" data-tab="recursos">6) Recursos</div>
+      <div class="tab" data-tab="cierre">7) Cierre</div>
+    </div>
+  </div>
+
+  <!-- DATOS -->
+  <div class="grid panel active" data-panel="datos">
+    <div class="card">
+      <h2>1) Datos del alumno/a</h2>
+      <p>Rellena lo básico para identificar tu formulario.</p>
+
+      <div class="two">
+        <div>
+          <label>Nombre y apellidos</label>
+          <input type="text" name="alumno_nombre" placeholder="Ej: Ana García López" />
+        </div>
+        <div>
+          <label>Fecha</label>
+          <input type="date" name="fecha" />
+        </div>
+      </div>
+
+      <div class="two">
+        <div>
+          <label>Grupo / turno (si aplica)</label>
+          <input type="text" name="grupo" placeholder="Ej: Tarde / Grupo A" />
+        </div>
+        <div>
+          <label>¿Has programado antes?</label>
+          <select name="exp_programacion">
+            <option value="">— Selecciona —</option>
+            <option>Nunca</option>
+            <option>He tocado algo (muy poco)</option>
+            <option>He hecho ejercicios sueltos</option>
+            <option>He creado algún proyecto pequeño</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two">
+        <div>
+          <label>Tu nivel actual (autoestima técnica)</label>
+          <select name="nivel_auto">
+            <option value="">— Selecciona —</option>
+            <option>1 · Me pierdo con lo técnico</option>
+            <option>2 · Me defiendo como usuario</option>
+            <option>3 · Voy pillando conceptos si hay guía</option>
+            <option>4 · Puedo seguir ejemplos y adaptarlos</option>
+            <option>5 · Me suelto creando cosas por mi cuenta</option>
+          </select>
+        </div>
+        <div>
+          <label>¿Qué te motiva más de este módulo?</label>
+          <input type="text" name="motivo_rapido" placeholder="Ej: crear una app real para talleres" />
+        </div>
+      </div>
+
+      <div class="hint">
+        ✅ Si no sabes algo, marca <strong>“No lo sé”</strong>. Nos ayuda más que adivinar.
+      </div>
+    </div>
+  </div>
+
+  <!-- CONCEPTOS (emparejar) -->
+  <div class="grid panel" data-panel="conceptos">
+    <div class="card">
+      <h2>2) Conceptos clave (emparejar)</h2>
+      <p>Selecciona la opción que mejor define cada término.</p>
+      <div id="matchList"></div>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="grid panel" data-panel="test">
+    <div class="card">
+      <h2>3) Test rápido</h2>
+      <p>Marca una opción. Si no lo sabes, “No lo sé”.</p>
+      <div id="mcqList"></div>
+    </div>
+  </div>
+
+  <!-- CASOS -->
+  <div class="grid panel" data-panel="casos">
+    <div class="card">
+      <h2>4) Mini-casos</h2>
+      <p>Queremos ver cómo razonas. No hace falta que sea perfecto.</p>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">1</div>
+          <div>
+            <div class="qtext">En MVC: ¿qué parte debería pedir los datos a la base de datos para el “Listado de clientes”?</div>
+            <div class="small">1–3 frases.</div>
+          </div>
+        </div>
+        <textarea name="caso_mvc_1" placeholder="Respuesta..."></textarea>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">2</div>
+          <div>
+            <div class="qtext">Explica con tus palabras la diferencia entre web estática y web dinámica (con un ejemplo de cada).</div>
+          </div>
+        </div>
+        <textarea name="caso_web_1" placeholder="Respuesta..."></textarea>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">3</div>
+          <div>
+            <div class="qtext">Te piden buscar clientes por matrícula. ¿Filtrarías en SQL o en PHP? ¿Por qué?</div>
+          </div>
+        </div>
+        <textarea name="caso_sql_php" placeholder="Respuesta..."></textarea>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">4</div>
+          <div>
+            <div class="qtext">Escribe una consulta SQL aproximada para buscar clientes cuyo nombre contenga “Juan”.</div>
+            <div class="small">Aunque no sepas la tabla exacta, usa nombres genéricos.</div>
+          </div>
+        </div>
+        <textarea name="caso_sql_1" placeholder="Ej: SELECT ... FROM ... WHERE ...;"></textarea>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">5</div>
+          <div class="qtext">¿Qué te preocupa más ahora mismo? ¿Qué necesitarías para sentirte seguro/a?</div>
+        </div>
+        <textarea name="caso_miedo" placeholder="Respuesta..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOTIVACIÓN -->
+  <div class="grid panel" data-panel="motivacion">
+    <div class="card">
+      <h2>5) Motivación y expectativas</h2>
+      <p>Esto nos ayuda a que el proyecto sea útil para ti.</p>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">1</div>
+          <div class="qtext">¿Qué esperas conseguir al final del curso?</div>
+        </div>
+        <textarea name="expectativas" placeholder="Respuesta..."></textarea>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">2</div>
+          <div>
+            <div class="qtext">¿Cómo te gusta aprender?</div>
+            <div class="small">Marca lo que más encaje contigo.</div>
+          </div>
+        </div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="aprendo[]" value="ejemplos"> <span>Con ejemplos guiados paso a paso</span></label>
+          <label class="opt"><input type="checkbox" name="aprendo[]" value="reto"> <span>Con retos cortos y feedback rápido</span></label>
+          <label class="opt"><input type="checkbox" name="aprendo[]" value="proyecto"> <span>Con un proyecto real (aunque cueste al principio)</span></label>
+          <label class="opt"><input type="checkbox" name="aprendo[]" value="parejas"> <span>En parejas / grupos</span></label>
+          <label class="opt"><input type="checkbox" name="aprendo[]" value="solo"> <span>Solo/a, con mi ritmo</span></label>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">3</div>
+          <div class="qtext">Preferencia de ritmo (1 lento-seguro · 5 rápido-desafiante)</div>
+        </div>
+        <select name="ritmo">
+          <option value="">— Selecciona —</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+        </select>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">4</div>
+          <div class="qtext">¿Qué tema te interesa más?</div>
+        </div>
+        <select name="tema_interes">
+          <option value="">— Selecciona —</option>
+          <option>MySQL y consultas SQL</option>
+          <option>Programación PHP</option>
+          <option>MVC (modelo-controlador-vista)</option>
+          <option>Back-office (panel de gestión)</option>
+          <option>Optimización y rendimiento</option>
+          <option>No lo tengo claro aún</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECURSOS -->
+  <div class="grid panel" data-panel="recursos">
+    <div class="card">
+      <h2>6) Recursos y situación</h2>
+      <p>Para planificar apoyo y tareas (si hicieran falta).</p>
+
+      <div class="two">
+        <div>
+          <label>¿Tienes ordenador en casa?</label>
+          <select name="pc_casa">
+            <option value="">— Selecciona —</option>
+            <option>Sí</option>
+            <option>No</option>
+            <option>Sí, pero compartido</option>
+          </select>
+        </div>
+        <div>
+          <label>¿Tienes Internet estable?</label>
+          <select name="internet">
+            <option value="">— Selecciona —</option>
+            <option>Sí</option>
+            <option>A veces</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two">
+        <div>
+          <label>Tiempo semanal fuera de clase (si hiciera falta)</label>
+          <select name="tiempo_fuera">
+            <option value="">— Selecciona —</option>
+            <option>0 h</option>
+            <option>1–2 h</option>
+            <option>3–4 h</option>
+            <option>5+ h</option>
+          </select>
+        </div>
+        <div>
+          <label>¿Qué te frena más normalmente?</label>
+          <select name="freno">
+            <option value="">— Selecciona —</option>
+            <option>Me bloqueo con errores</option>
+            <option>Me cuesta concentrarme</option>
+            <option>Me falta base técnica</option>
+            <option>Me da miedo “romperlo”</option>
+            <option>No suelo tener frenos</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="qtitle"><div class="qnum">1</div>
+          <div class="qtext">Si pudieras pedir una cosa al profe para ayudarte, ¿qué sería?</div>
+        </div>
+        <textarea name="peticion" placeholder="Respuesta..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="grid panel" data-panel="cierre">
+    <div class="card">
+      <h2>7) Cierre</h2>
+      <p>Cuando termines, imprime a PDF (se añadirá una copia de seguridad al final).</p>
+      <div class="hint">
+        <strong>Entrega:</strong> imprime a PDF y entrega el archivo según indique el profesor.
+        <br><span class="small">La última página del PDF incluirá una “copia de seguridad de respuestas”.</span>
+      </div>
+      <p class="small" style="margin-top:10px">
+        Privacidad: este formulario guarda respuestas en tu navegador para no perderlas (localStorage). El botón “Borrar respuestas” lo elimina.
+      </p>
+    </div>
+  </div>
+
+  <!-- PRINT BACKUP -->
+  <div id="printBackup" class="card print-break">
+    <h2>Vista de copia de seguridad de respuestas (generada al imprimir)</h2>
+    <p style="color:#444">Se añade automáticamente al PDF para asegurar la copia de las respuestas.</p>
+    <div id="backupContent" class="mono" style="font-size:12px;white-space:pre-wrap"></div>
+  </div>
+</div>
+
+<script>
+  const STORE_KEY = "uf2177_eval_inicial_alumno_v1";
+
+  const matchOptions = [
+    "Capa que contiene lógica y acceso a datos",
+    "Capa que recibe la petición y decide qué hacer",
+    "Capa que muestra la información (plantillas)",
+    "Conjunto de tablas relacionadas",
+    "Lenguaje para consultar y modificar datos en BD",
+    "Lenguaje de servidor para generar páginas dinámicas",
+    "Panel de administración/gestión (zona privada)",
+    "Parte visible para el usuario final (interfaz)",
+    "Patrón de arquitectura: Modelo–Vista–Controlador",
+    "Sentencia SQL para leer datos",
+    "Sentencia SQL para insertar datos",
+    "Sentencia SQL para actualizar datos",
+    "Sentencia SQL para borrar datos",
+    "Servidor web muy común en XAMPP",
+    "Sistema gestor de bases de datos (SGBD)",
+    "Software que atiende peticiones HTTP (por ejemplo, Apache)",
+    "Técnica para evitar inyección SQL (consultas preparadas)",
+    "Un programa para escribir y depurar código (editor + terminal + extensiones)",
+    "Web que no cambia en el servidor (HTML/CSS fijos)",
+    "Web que genera contenido en el servidor (PHP + BD)"
+  ];
+
+  const matchItems = [
+    "IDE","Web estática","Web dinámica","Front-office","Back-office","PHP","Servidor (concepto)","Apache",
+    "MySQL","SQL","Base de datos","MVC","Modelo","Controlador","Vista","SELECT","INSERT","UPDATE","DELETE","Prepared statement"
+  ];
+
+  const mcq = [
+    { q:"¿Cuál es el objetivo principal de un IDE como VS Code en este curso?",
+      a:["Diseñar logos y banners","Escribir/organizar/depurar el código del proyecto","Reparar ordenadores","Gestionar redes Wi-Fi","No lo sé"]},
+    { q:"Una web estática normalmente se compone de…",
+      a:["HTML/CSS (y a veces JS) sin lógica de servidor","PHP y MySQL obligatoriamente","Solo imágenes","Solo Excel","No lo sé"]},
+    { q:"Una web dinámica significa que…",
+      a:["No tiene estilos","El servidor genera contenido (por ejemplo con PHP)","No usa Internet","Solo funciona en móviles","No lo sé"]},
+    { q:"Apache es principalmente…",
+      a:["Un sistema operativo","Un servidor web","Un lenguaje de programación","Un antivirus","No lo sé"]},
+    { q:"MySQL es…",
+      a:["Un editor de texto","Un SGBD (gestor de bases de datos)","Un navegador","Un framework CSS","No lo sé"]},
+    { q:"SQL sirve para…",
+      a:["Editar fotos","Crear y consultar datos en bases de datos","Diseñar interfaces 3D","Hacer streaming","No lo sé"]},
+    { q:"MVC significa…",
+      a:["Modelo-Vista-Controlador","Máquina-Video-Código","Micro-Vista-Cliente","Modelo-Variable-Clase","No lo sé"]},
+    { q:"CRUD significa…",
+      a:["Crear-Leer-Actualizar-Borrar","Copiar-Reparar-Usar-Depurar","Conectar-Rutar-Unir-Diseñar","Código-Ruta-Usuario-Datos","No lo sé"]},
+    { q:"Una transacción en BD sirve para…",
+      a:["Hacer la web más bonita","Asegurar cambios atómicos (commit/rollback)","Cambiar la contraseña del Wi-Fi","Crear usuarios en Windows","No lo sé"]},
+    { q:"EXPLAIN en MySQL sirve para…",
+      a:["Traducir SQL a español","Ver el plan de ejecución de una consulta (y optimizar)","Crear tablas","Borrar registros","No lo sé"]},
+  ];
+
+  // Tabs
+  document.querySelectorAll(".tab").forEach(t=>{
+    t.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      t.classList.add("active");
+      const tab = t.dataset.tab;
+      document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active", p.dataset.panel===tab));
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+  });
+
+  // Render matching
+  const matchList = document.getElementById("matchList");
+  matchItems.forEach((term, idx)=>{
+    const div = document.createElement("div");
+    div.className = "q";
+    div.innerHTML = `
+      <div class="qtitle"><div class="qnum">${idx+1}</div>
+        <div>
+          <div class="qtext">${term}</div>
+          <div class="small">Elige la definición más adecuada.</div>
+        </div>
+      </div>
+      <label>Definición</label>
+      <select name="match_${idx}">
+        <option value="">— Selecciona —</option>
+        ${matchOptions.map((opt,i)=>`<option value="${i}">${opt}</option>`).join("")}
+      </select>
+    `;
+    matchList.appendChild(div);
+  });
+
+  // Render MCQ
+  const mcqList = document.getElementById("mcqList");
+  mcq.forEach((item, idx)=>{
+    const div = document.createElement("div");
+    div.className = "q";
+    div.innerHTML = `
+      <div class="qtitle"><div class="qnum">${idx+1}</div>
+        <div>
+          <div class="qtext">${item.q}</div>
+          <div class="small">Marca 1 opción.</div>
+        </div>
+      </div>
+      <div class="opts">
+        ${item.a.map((opt,i)=>`
+          <label class="opt">
+            <input type="radio" name="mcq_${idx}" value="${i}">
+            <span>${opt}</span>
+          </label>
+        `).join("")}
+      </div>
+    `;
+    mcqList.appendChild(div);
+  });
+
+  // Autosave
+  function collect(){
+    const data = {};
+    document.querySelectorAll("input, select, textarea").forEach(el=>{
+      const name = el.name;
+      if(!name) return;
+      if(el.type==="radio"){ if(el.checked) data[name]=el.value; }
+      else if(el.type==="checkbox"){
+        if(name.endsWith("[]")){
+          if(!data[name]) data[name]=[];
+          if(el.checked) data[name].push(el.value);
+        } else data[name]= el.checked ? "1":"0";
+      } else data[name]= el.value;
+    });
+    return data;
+  }
+  function apply(data){
+    if(!data) return;
+    document.querySelectorAll("input, select, textarea").forEach(el=>{
+      const name = el.name;
+      if(!name || !(name in data)) return;
+      if(el.type==="radio") el.checked = (data[name]===el.value);
+      else if(el.type==="checkbox"){
+        if(name.endsWith("[]")) el.checked = Array.isArray(data[name]) && data[name].includes(el.value);
+        else el.checked = (data[name]==="1");
+      } else el.value = data[name];
+    });
+  }
+  function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(collect())); }
+  function load(){
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return;
+    try{ apply(JSON.parse(raw)); }catch{}
+  }
+  document.addEventListener("input", (e)=>{ if(e.target.matches("input,select,textarea")) save(); });
+
+  // Print backup
+  function buildBackup(){
+    const data = collect();
+    const keys = Object.keys(data).sort((a,b)=>a.localeCompare(b,'es'));
+    const lines = [];
+    lines.push("UF2177 · Copia de seguridad de respuestas");
+    lines.push("====================================");
+    lines.push("");
+    keys.forEach(k=>{
+      const v = data[k];
+      if(Array.isArray(v)) lines.push(`${k}: ${v.join(", ")}`);
+      else lines.push(`${k}: ${v}`);
+    });
+    document.getElementById("backupContent").textContent = lines.join("\n");
+  }
+  window.addEventListener("beforeprint", buildBackup);
+
+  document.getElementById("btnPrint").addEventListener("click", ()=>{
+    buildBackup();
+    window.print();
+  });
+
+  document.getElementById("btnReset").addEventListener("click", ()=>{
+    if(!confirm("¿Borrar todas las respuestas guardadas en este navegador?")) return;
+    localStorage.removeItem(STORE_KEY);
+    location.reload();
+  });
+
+  load();
+</script>
+</body>
+</html>
